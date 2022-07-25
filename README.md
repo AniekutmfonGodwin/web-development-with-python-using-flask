@@ -1,4 +1,4 @@
-# web-development-python-using-flask
+# Web development with python using flask framework
 web development with python using flask and flask-sqlalchemy orm for database integration
 
 
