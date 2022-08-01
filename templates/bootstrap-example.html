@@ -1,0 +1,20 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}This is a test page{% endblock %}
+
+
+{% block content %}
+  <h1>Hello, Bootstrap</h1>
+
+  <form method="POST" action="/test">
+    {{ form.csrf_token }}
+    {{ form.name.label }} {{ form.name(size=20) }}
+    {% if form.errors.name %}
+        <span style="color: red;">
+            {{form.errors.name}}
+        </span>
+    
+    {% endif %}
+    {{ form.message.label }} {{ form.message() }}
+    <input type="submit" value="Go">
+</form>
+{% endblock %}
