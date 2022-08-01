@@ -34,3 +34,5 @@ def send_mail(email):
 
     mail.send(msg)
     return "done"
+
+
