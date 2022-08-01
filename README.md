@@ -28,3 +28,8 @@ web development with python using flask and flask-sqlalchemy orm for database in
         python hello.py
 
 
+
+
+## Assignment
+* Push your code to github
+* create a route that accept and email and send a mail with and html template using flask mailer.
