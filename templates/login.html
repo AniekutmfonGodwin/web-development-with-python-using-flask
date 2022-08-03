@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}
+Login
+{% endblock title %}
+
+{% block body %}
+<div style="margin-top:1000px;margin-left:50px;width:100vw;">
+</div>
+<form action="/auth/login" method="post">
+    {{ form.csrf_token }}
+    <div>
+        {{ form.username.label }} 
+    </div>
+    <div>
+        {{ form.username(size=20) }}
+    </div>
+    <div>
+        {{ form.password.label }} 
+    </div>
+    <div>
+        {{ form.password(size=20) }}
+    </div>
+    <button type="Submit">
+        Submit
+    </button>
+</form>
+
+{% endblock body %}
