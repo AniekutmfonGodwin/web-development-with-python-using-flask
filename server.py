@@ -7,6 +7,7 @@ from flask_mail import Mail
 login_manager = LoginManager()
 
 app = Flask(__name__)
+
 mail = Mail(app)
 
 @login_manager.user_loader

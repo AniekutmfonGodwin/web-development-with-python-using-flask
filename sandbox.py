@@ -37,6 +37,7 @@ class Student:
     def verify_password(self,password):
         return self.password_hash == password + "additional data"
 
+x = 10
 
 if __name__ == "__main__":
     student = Student("anies","eke")

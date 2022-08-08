@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$1" ]
+    then
+        sudo lsof -i:$1
+        echo "run command to kill process"
+        echo "kill <PID>"
+    else
+        echo "No port provided"
+fi

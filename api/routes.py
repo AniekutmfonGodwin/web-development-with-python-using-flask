@@ -4,7 +4,7 @@ from flask import Blueprint, jsonify
 api = Blueprint("api",__name__)
 
 
-@api.get("/blogs/")
+@api.route("/blogs/")
 def blog_list():
     return jsonify([
         {
