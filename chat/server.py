@@ -1,9 +1,9 @@
 # Python program to implement server side of chat room.
+from http import client
 import socket
 import select
 import sys
-'''Replace "thread" with "_thread" for python 3'''
-from threading import Thread
+from _thread import start_new_thread
 
 """The first argument AF_INET is the address domain of the
 socket. This is used when we have an Internet Domain with
@@ -50,14 +50,14 @@ def clientthread(conn:socket.socket, addr):
         try:
             message = conn.recv(2048)
             if message:
-
                 """prints the message and address of the
                 user who just sent the message on the server
                 terminal"""
-                print ("<" + addr[0] + "> " + message)
+                print ("<" + addr[0] + "> " + message.decode())
 
                 # Calls broadcast function to send message to all
-                message_to_send = "<" + addr[0] + "> " + message
+                message_to_send = "<" + addr[0] + "> " + message.decode()
+
                 broadcast(message_to_send, conn)
 
             else:
@@ -71,13 +71,15 @@ def clientthread(conn:socket.socket, addr):
 """Using the below function, we broadcast the message to all
 clients who's object is not the same as the one sending
 the message """
-def broadcast(message, connection:socket.socket):
+def broadcast(message:str, connection:socket.socket):
     for clients in list_of_clients:
         clients:socket.socket
+        
         if clients!=connection:
             try:
-                clients.send(message)
-            except:
+                clients.send(message.encode())
+            except Exception as e:
+                print("error ",e)
                 clients.close()
 
                 # if the link is broken, we remove the client
@@ -90,26 +92,33 @@ def remove(connection):
 	if connection in list_of_clients:
 		list_of_clients.remove(connection)
 
-while True:
+try:
+    while True:
 
-    """Accepts a connection request and stores two parameters,
-    conn which is a socket object for that user, and addr
-    which contains the IP address of the client that just
-    connected"""
-    conn, addr = server.accept()
+        """Accepts a connection request and stores two parameters,
+        conn which is a socket object for that user, and addr
+        which contains the IP address of the client that just
+        connected"""
+        conn, addr = server.accept()
 
-    """Maintains a list of clients for ease of broadcasting
-    a message to all available people in the chatroom"""
-    list_of_clients.append(conn)
-    
-    # prints the address of the user that just connected
-    print (addr[0] + " connected")
+        """Maintains a list of clients for ease of broadcasting
+        a message to all available people in the chatroom"""
+        list_of_clients.append(conn)
 
-    # creates and individual thread for every user
-    # that connects
-    task = Thread(target = clientthread,args=[conn,addr])	
-    task.daemon = True
-    task.run()
+        # prints the address of the user that just connected
+        print (addr[0] + " connected")
 
-conn.close()
+        # creates and individual thread for every user
+        # that connects
+        start_new_thread(clientthread,(conn,addr))	
+        
+except KeyboardInterrupt:
+    print("interrupt")
+    ...
+for conn in list_of_clients:
+    conn:socket.socket
+    try:
+        conn.close()
+    except:
+        print("error while closing ",conn)
 server.close()

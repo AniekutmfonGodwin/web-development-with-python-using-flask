@@ -1,10 +1,11 @@
 #!/bin/bash
+pkill Python
+# if [ "$1" ]
+#     then
+#         # sudo lsof -i:$1
+#         # echo "run command to kill process"
+#         # echo "kill <PID>"
 
-if [ "$1" ]
-    then
-        sudo lsof -i:$1
-        echo "run command to kill process"
-        echo "kill <PID>"
-    else
-        echo "No port provided"
-fi
+#     else
+#         echo "No port provided"
+# fi
