@@ -40,8 +40,8 @@ server.listen(100)
 
 list_of_clients = []
 
-def clientthread(conn:socket.socket, addr):
-
+def clientthread(conn:socket.socket, addr:str):
+    
     # sends a message to the client whose user object is conn
     conn.send("Welcome to this chatroom!".encode())
     

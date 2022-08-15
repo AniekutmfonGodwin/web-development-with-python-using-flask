@@ -18,10 +18,10 @@ def home():
     # form = dict(username="anies",email="myemail@gmail.com")
     # db.session.add(User(**form))
     # db.session.commit()
-    # # return render_template("index.html")
-    # result =  render_template("index.html",username = 'Anies')
-    print(url_for("main.home"))
-    return "home"
+    
+    return render_template("index.html",username = 'Anies')
+    
+    
 
 
 @main.route("/<name>/")

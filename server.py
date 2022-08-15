@@ -2,7 +2,7 @@ from flask import Flask
 from settings import EMAIL, PASSWORD
 from flask_login import LoginManager
 from flask_mail import Mail
-
+import os
 
 login_manager = LoginManager()
 
@@ -23,6 +23,7 @@ app.config["MAIL_USERNAME"] = EMAIL
 app.config["MAIL_PASSWORD"] = PASSWORD
 app.config["MAIL_DEFAULT_SENDER"] = EMAIL
 app.config["SECRET_KEY"] = "SGGHTggafsg45562987"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
 
@@ -42,8 +43,10 @@ def create_app():
 
     return app
 
+DEBUG = os.getenv("DEBUG","False").lower() in ["true",'1',1]
 
+app = create_app()
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(debug=True,port = 5002)
+    app.run(debug=DEBUG,port = 5002)

@@ -37,14 +37,18 @@ class Student:
     def verify_password(self,password):
         return self.password_hash == password + "additional data"
 
-x = 10
+# x = 10
 
 if __name__ == "__main__":
-    student = Student("anies","eke")
-    student.password = "secret"
-    student.password = "secret2"
+    import sys
+    a = int(sys.argv[1])
+    b = int(sys.argv[2])
+    print("hello world \n",a+b)
+    # student = Student("anies","eke")
+    # student.password = "secret"
+    # student.password = "secret2"
     
-    print(student.verify_password("secretddd"))
+    # print(student.verify_password("secretddd"))
 
 
     
